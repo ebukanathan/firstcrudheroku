@@ -1,41 +1,6 @@
-const express = require('express');
-const app = express();
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-require('dotenv').config;
-
-app.use(bodyParser.json())
-
-const connectionString = 'mongodb+srv://ebuka:ebukanathan@cluster0.nboky.mongodb.net/dbclass?retryWrites=true&w=majority'
-
-mongoose.connect(connectionString,{
-    useNewUrlParser:true,
-    useUnifiedTopology:true,
-    useFindAndModify:true
-}, (err)=>{
-    if(err) {
-        console.log(err)
-    }else{
-        console.log('database connected successfully')
-    }
-})
-
-
-
-//create Schema
-const personalInfoSchema = new mongoose.Schema({
-    name:String,
-    email:String,
-    country:String
-})  
-
-
-const friends = mongoose.model('friends',personalInfoSchema)
-//post request to /  to create a new json
-
-app.post('/info',(req,res)=>{
-    
-    
+const friends = require("../models/friends")
+exports.creatFriends = function(req,res){
+      
     friends.create({
         name:req.body.name,
         email:req.body.email,
@@ -47,9 +12,9 @@ app.post('/info',(req,res)=>{
 
         }
     })
-})
-//get request to / to get files
-app.get('/info',(req,res)=>{
+};
+
+exports.fetchFriends = function(req,res){
     friends.find({},(err,data)=>{
         if(err){
             return res.status(500).json({err})
@@ -58,10 +23,9 @@ app.get('/info',(req,res)=>{
 
         }
     })
-})
+};
 
-//put request to /..:id to update
-app.put('/info/:id',(req,res)=>{
+exports.updateFriends = function(req,res){
     friends.findByIdAndUpdate(req.params.id, {
         name:req.body.name,
         email:req.body.email
@@ -75,10 +39,9 @@ app.put('/info/:id',(req,res)=>{
         })
     }
     }) 
-})
-//delete request 
+};
 
-app.delete('/info/:id',(req,res)=>{
+exports.deleteFriends = function(req,res){
     friends.findByIdAndDelete(req.params.id,(err,data)=>{
         if (err){
             return res.status(500).json({message:err})
@@ -90,7 +53,4 @@ app.delete('/info/:id',(req,res)=>{
         }
     })
 
-})
-
-const port = process.env.PORT ||3000
-app.listen(4000)
+}
