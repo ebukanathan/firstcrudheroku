@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+require('dotenv').config;
 
 app.use(bodyParser.json())
 
@@ -91,7 +92,5 @@ app.delete('/info/:id',(req,res)=>{
 
 })
 
-
-app.listen(4000,()=>{
-    console.log('the server is listening on port 4000...')
-}) 
+const port = process.env.PORT ||3000
+app.listen(4000)
