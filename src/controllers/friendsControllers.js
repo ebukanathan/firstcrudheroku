@@ -25,6 +25,7 @@ exports.fetchFriends = function(req,res){
     })
 };
 
+
 exports.updateFriends = function(req,res){
     friends.findByIdAndUpdate(req.params.id, {
         name:req.body.name,
