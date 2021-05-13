@@ -42,6 +42,20 @@ exports.updateFriends = function(req,res){
     }) 
 };
 
+exports.homeFriends = function(req,res){
+    (err,data)=>{
+        if (err){
+            return res.status(500).json({message:err})
+        }else{
+            return res.status(200).json({message:"Welcome to my  CRUD app"})
+
+        }
+    }
+   
+};  
+
+
+
 exports.deleteFriends = function(req,res){
     friends.findByIdAndDelete(req.params.id,(err,data)=>{
         if (err){
