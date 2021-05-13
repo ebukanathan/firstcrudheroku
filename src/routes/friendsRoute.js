@@ -11,6 +11,8 @@ router.get('/info',friendsCtrl.fetchFriends)
 
 router.get('/',friendsCtrl.fetchFriends)
 
+router.get('/info/:id',friendsCtrl.fetchFriendsById)
+
 //put request to /..:id to update
 router.put('/info/:id',friendsCtrl.updateFriends)
 //delete request 
