@@ -9,7 +9,7 @@ router.post('/info',friendsCtrl.creatFriends)
 //get request to / to get files
 router.get('/info',friendsCtrl.fetchFriends)
 
-router.get('/',friendsCtrl.homeFriends)
+router.get('/',friendsCtrl.fetchFriends)
 
 //put request to /..:id to update
 router.put('/info/:id',friendsCtrl.updateFriends)
